@@ -8,8 +8,11 @@ import play.api.mvc.Result
 import play.api.mvc.Results.InternalServerError
 import play.api.Logger
 
+import scalaz.\/
+import scalaz.\/-
+import scalaz.-\/
 import scalaz._
-import Scalaz._ //:TODO
+import Scalaz._
 
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL._
