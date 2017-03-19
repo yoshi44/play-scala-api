@@ -132,5 +132,7 @@
     <orderEntry type="library" name="SBT: xalan:xalan:2.7.2:jar" level="project" />
     <orderEntry type="library" name="SBT: xerces:xercesImpl:2.11.0:jar" level="project" />
     <orderEntry type="library" name="SBT: xml-apis:xml-apis:1.4.01:jar" level="project" />
+    <orderEntry type="library" name="org.scalaz:scalaz-core_2.11:7.2.10" level="application" />
+    <orderEntry type="library" name="net.ruippeixotog:scala-scraper_2.11:1.2.0" level="project" />
   </component>
 </module>
