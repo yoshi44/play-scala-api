@@ -16,3 +16,6 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-digest" % "1.1.1")
 addSbtPlugin("com.typesafe.sbt" % "sbt-mocha" % "1.1.0")
 
 addSbtPlugin("org.irundaia.sbt" % "sbt-sassify" % "1.4.6")
+
+// add plugins
+addSbtPlugin("com.typesafe.sbt" % "sbt-scalariform" % "1.3.0") // :TODO why not 1.6.0?
