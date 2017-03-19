@@ -10,6 +10,8 @@ libraryDependencies ++= Seq(
   jdbc,
   cache,
   ws,
-  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test
+  "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
+  "org.scalaz" %% "scalaz-core" % "7.2.9",
+  "net.ruippeixotog" %% "scala-scraper" % "1.2.0"
 )
 
