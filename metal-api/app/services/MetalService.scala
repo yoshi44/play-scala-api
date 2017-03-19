@@ -13,12 +13,8 @@ import models.MetalPrice
 class MetalService @Inject() (metalScrape: MetalScrape) {
 
   val logger = Logger(this.getClass())
-  import scalaz._, Scalaz._ //:TODO
+  import scalaz.\/
 
-  def getMetalPrice(): Result \/ Option[MetalPrice] = {
-    metalScrape.getMetalPrice() match {
-      case \/-(todayPrices) => todayPrices.right
-      case -\/(error)       => error.left
-    }
-  }
+  def getMetalPrice(): Result \/ Option[MetalPrice] =
+    metalScrape.getMetalPrice()
 }
