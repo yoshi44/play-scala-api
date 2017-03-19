@@ -14,9 +14,7 @@ import Scalaz._ //:TODO
 import net.ruippeixotog.scalascraper.browser.JsoupBrowser
 import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
-import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
 import net.ruippeixotog.scalascraper.model.Document
-import net.ruippeixotog.scalascraper.model.Element
 import models.MetalPrice
 
 @Singleton
