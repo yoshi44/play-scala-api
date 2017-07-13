@@ -23,7 +23,9 @@ build:
     - script:
         name: echo
         code: |
-          echo "hello world!"
+          echo "begin hello world!"
+          uname -a
+          echo "end hello world!"
     #- script:
     #    name: install JDK
     #    code: |
