@@ -61,8 +61,22 @@ build:
           export PATH=$PATH:`pwd`
           echo "----- END   install sbt -----"
     - script:
-        name: test
-        code: sbt test
+        name: sbt update
+        code: |
+          echo "----- BEGIN sbt update -----"
+          sbt update
+          echo "----- END   sbt update -----"
+    - install-packages:
+              packages: sbt
+    - script:
+        name: sbt test
+        code: |
+          echo "----- BEGIN sbt test -----"
+          sbt test
+          echo "----- END   sbt test -----"
     - script:
         name: build
-        code: sbt dist
+        code: |
+          echo "----- BEGIN sbt dist -----"
+          sbt dist
+          echo "----- BEGIN sbt dist -----"
