@@ -20,11 +20,16 @@ build:
     # Steps make up the actions in your pipeline
     # Read more about steps on our dev center:
     # http://devcenter.wercker.com/docs/steps/index.html
+  after-steps:
+    - slack-notifier:
+      url: $SLACK_HOOKS_KEY
+      channel: ci
+      username: play-scala-api Wercker
   steps:
     - script:
         name: echo
         code: |
-          echo "hello world!"
+          echo "----- BEGIN Wercker -----"
     - script:
         name: init
         code: |
@@ -32,6 +37,8 @@ build:
           sudo apt-get update
           sudo apt-get -y install software-properties-common
           sudo apt-get -y install wget
+          sudo apt-get -y install ruby-full
+          sudo apt-get -y install curl
           echo "----- END   init -----"
     - script:
         name: install JDK
@@ -39,7 +46,6 @@ build:
           echo "----- BEGIN install JDK -----"
           sudo apt-get -y install gnupg
           wget -qO - https://deb.opera.com/archive.key | sudo apt-key add -
-          echo "111"
           echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
           sudo add-apt-repository ppa:webupd8team/java
           sudo apt-key update
@@ -48,14 +54,18 @@ build:
           sudo apt-get -y --allow-unauthenticated install oracle-java8-set-default
           javac -version
           echo "----- END   install JDK -----"
+#    - script:
+#        code: |
+#          [[ ! -e "$WERCKER_CACHE_DIR/ivy2-cache" ]] && mkdir "$WERCKER_CACHE_DIR/ivy2-cache"
+#          mkdir ~/.ivy2
+#          ln -s "$WERCKER_CACHE_DIR/ivy2-cache" ~/.ivy2/cache
     - script:
         name: install sbt
         code: |
           echo "----- BEGIN install sbt -----"
-          cd bin
           sudo apt-get update
           sudo apt-get install wget
-          wget https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.7/sbt-launch.jar
+          wget https://repo.typesafe.com/typesafe/ivy-releases/org.scala-sbt/sbt-launch/0.13.11/sbt-launch.jar
           echo 'SBT_OPTS="-Xms512M -Xmx1536M -Xss1M -XX:+CMSClassUnloadingEnabled -XX:MaxPermSize=256M"' > sbt
           echo 'java $SBT_OPTS -jar `dirname $0`/sbt-launch.jar "$@"' >> sbt
           chmod u+x sbt
@@ -67,17 +77,21 @@ build:
           echo "----- BEGIN sbt update -----"
           sbt update
           echo "----- END   sbt update -----"
-    - install-packages:
-              packages: sbt
+#test:
+#  steps:
     - script:
         name: sbt test
         code: |
           echo "----- BEGIN sbt test -----"
-          sbt test
+          sbt metalApi/test
+          sbt akkaBatch/test
           echo "----- END   sbt test -----"
+#dist:
+#  steps:
     - script:
-        name: build
+        name: sbt clean dist
         code: |
           echo "----- BEGIN sbt dist -----"
-          sbt dist
+          sbt metalApi/test
+          sbt akkaBatch/test
           echo "----- BEGIN sbt dist -----"
