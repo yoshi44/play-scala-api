@@ -42,7 +42,8 @@ lazy val metalApi = (project in file("metal-api"))
   .settings(libraryDependencies ++= Seq(
     "org.scalatestplus.play" %% "scalatestplus-play" % "1.5.1" % Test,
     "joda-time" % "joda-time" % "2.8",
-    "org.joda" % "joda-convert" % "1.7"
+    "org.joda" % "joda-convert" % "1.7",
+    "net.ruippeixotog" %% "scala-scraper" % "1.2.0"
   ))
   .enablePlugins(PlayScala)
 
